@@ -36,12 +36,13 @@ static int os_pushresult (lua_State *L, int i, const char *filename) {
 
 
 static int os_execute (lua_State *L) {
-#ifndef WAX_TARGET_OS_WATCH
+#if !defined(WAX_TARGET_OS_WATCH) && !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_OS_IPHONE)
     lua_pushinteger(L, system(luaL_optstring(L, 1, NULL)));
-#endif
     return 1;
+#else
+    return 0;
+#endif
 }
-
 
 static int os_remove (lua_State *L) {
   const char *filename = luaL_checkstring(L, 1);

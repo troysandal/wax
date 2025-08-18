@@ -14,7 +14,6 @@
 #import "wax_helpers.h"
 #import "wax_gc.h"
 #import "wax_server.h"
-#import "wax_stdlib.h"
 
 #import "lauxlib.h"
 #import "lobject.h"

@@ -1,5 +1,5 @@
 #ifndef wax_xml
-#define wax_xml_h
+#define wax_xml
 
 #import "lua.h"
 

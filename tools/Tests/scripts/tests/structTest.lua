@@ -1,3 +1,11 @@
+function createCGRect()
+  if wax.isArm64 == true then
+    wax.struct.create("CGRect", "dddd", "x", "y", "width", "height")
+  else
+    wax.struct.create("CGRect", "ffff", "x", "y", "width", "height")
+  end
+end
+
 describe["Unpacking structs"] = function()
   before = function()
     Structs = wax.class["Structs"]
@@ -28,7 +36,12 @@ describe["Packing structs"] = function()
   end
   
   it["can pack a multivalue struct"] = function()
-    local struct = wax.struct.pack("ffff", 1, 2, 3, 4)
+    local struct
+    if wax.isArm64 == true then
+      struct = wax.struct.pack("dddd", 1, 2, 3, 4)
+    else
+      struct = wax.struct.pack("ffff", 1, 2, 3, 4)
+    end
     expect( Structs:expectsCGRectOneTwoThreeFour(struct) ).should_be(true)
   end
   
@@ -44,6 +57,7 @@ end
 describe["Creating structs"] = function()
   before = function()
     Structs = wax.class["Structs"]
+    createCGRect()
   end
 
   it["can be created"] = function()
@@ -57,9 +71,10 @@ describe["Creating structs"] = function()
     expect( Structs:expectsCustomStructFiftySixty(CustomStruct(50,60)) ).should_be(true)
   end
 
+
   it["reads existing structs by obj-c correctly"] = function()
-    wax.struct.create("CGRect", "ffff", "x", "y", "width", "height")
-    expect( Structs:expectsCGRectTwoFourSixEight(CGRect(2,4,6,8)) ).should_be(true)
+    local actual = CGRect(2,4,6,8)
+    expect( Structs:expectsCGRectTwoFourSixEight(actual) ).should_be(true)
   end
 end
 
@@ -67,6 +82,7 @@ describe["Reading custom structs"] = function()
   before = function()
     Structs = wax.class["Structs"]
     wax.struct.create("CustomStruct", "dd", "x", "y")
+    createCGRect()
   end
 
   it["can access values by name"] = function()
@@ -82,7 +98,6 @@ describe["Reading custom structs"] = function()
   end
   
   it["can access existing structs by name"] = function()
-    wax.struct.create("CGRect", "ffff", "x", "y", "width", "height")
     local result = CGRect(2,4,6,8)
     expect( result.x ).should_be(2)
     expect( result.y ).should_be(4)

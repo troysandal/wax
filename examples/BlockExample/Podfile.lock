@@ -1,0 +1,23 @@
+PODS:
+  - Masonry (0.6.4)
+  - wax (1.2.1)
+
+DEPENDENCIES:
+  - Masonry (~> 0.6.4)
+  - wax (from `../../`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+
+EXTERNAL SOURCES:
+  wax:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  wax: 85f4b93dbbfa123ee592c458a0ce289d561e4704
+
+PODFILE CHECKSUM: cc202ae04419661fc27f8b8acce23caa6fdefe44
+
+COCOAPODS: 1.16.2

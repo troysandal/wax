@@ -54,7 +54,7 @@
          <EnvironmentVariable
             key = "WAX_TEST"
             value = "YES"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

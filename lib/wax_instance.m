@@ -12,9 +12,12 @@
 #import "wax.h"
 #import "wax_helpers.h"
 
+#import "wax_config.h"
+#import "wax_block_call.h"
+
 #import "lauxlib.h"
 #import "lobject.h"
-#import "wax_config.h"
+
 static int __index(lua_State *L);
 static int __newindex(lua_State *L);
 static int __gc(lua_State *L);
@@ -32,16 +35,6 @@ static BOOL overrideMethod(lua_State *L, wax_instance_userdata *instanceUserdata
 static int pcallUserdata(lua_State *L, id self, SEL selector, va_list args);
 static BOOL overrideMethodByInvocation(id klass, SEL selector, char *typeDescription, char *returnType) ;
 static BOOL addMethodByInvocation(id klass, SEL selector, char * typeDescription) ;
-
-//block call
-extern int luaCallBlock(lua_State *L);
-
-
-extern void wax_printStack(lua_State *L);
-extern void wax_printStackAt(lua_State *L, int i);
-extern void wax_printTable(lua_State *L, int t);
-extern void wax_log(int flag, NSString *format, ...);
-extern int wax_getStackTrace(lua_State *L);
 
 static const struct luaL_Reg metaFunctions[] = {
     {"__index", __index},

@@ -2,6 +2,7 @@ build/
 *.pbxuser
 *.perspectivev3
 wax.framework
+mobdebug.framework
 xcuserdata
 .DS_Store
 *.xcworkspacedata

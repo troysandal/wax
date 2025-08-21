@@ -40,8 +40,13 @@ if [ $WAX_COMPILE_SCRIPTS ]; then
   mv AppDelegate.dat "$DESTINATION_SCRIPTS_DIR"
   mv wax.dat "$DESTINATION_SCRIPTS_DIR"
 else
+  echo "Copying raw Lua scripts."
+  echo "Project Directory: $PROJECT_DIR"
+  echo "Source Scripts Directory: $SOURCE_SCRIPTS_DIR"
+  echo "Destination Scripts Directory: $DESTINATION_SCRIPTS_DIR"
   # copy everything in the data dir to the app (doesn't just have to be lua files, can be images, sounds, etc...)
   if [[ -d "$PROJECT_DIR/wax" ]]; then;
+    echo "Copying wax stdlib"
     # If we are using the framework, there is no wax dir
     cp -r "$PROJECT_DIR/wax/lib/stdlib" "$DESTINATION_SCRIPTS_DIR/wax"
   fi
@@ -55,4 +60,4 @@ touch -t $THE_FUTURE "$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH"/*.plist
 
 # Note:
 # It's handy to see the env of the build processes, there is some good stuff in there!
-env
+# env

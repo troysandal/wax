@@ -77,7 +77,7 @@ print("vb=", vb)
 			function( )
 				
 				print("dispatch_async start download");
-				local request = NSURLRequest:requestWithURL(NSURL:URLWithString("http://gw.alicdn.com/tps/i2/TB1M4BWHpXXXXbYXVXXdIns_XXX-1125-352.jpg_q50.jpg"));
+				local request = NSURLRequest:requestWithURL(NSURL:URLWithString("https://upload.wikimedia.org/wikipedia/commons/2/28/JPG_Test.jpg"));
 		        local data = NSURLConnection:sendSynchronousRequest_returningResponse_error(request, nil, nil);
 		        print("dispatch_async end download");
 

@@ -69,7 +69,7 @@
     NSLog(@"DISPATCH_TIME_NOW=%lld time=%lld", DISPATCH_TIME_NOW, time);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://gw.alicdn.com/tps/i2/TB1M4BWHpXXXXbYXVXXdIns_XXX-1125-352.jpg_q50.jpg"]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://upload.wikimedia.org/wikipedia/commons/2/28/JPG_Test.jpg"]];
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"data.length=%ld", data.length);

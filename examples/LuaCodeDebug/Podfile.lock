@@ -1,0 +1,21 @@
+PODS:
+  - mobdebug (1.0.0)
+  - wax (1.2.1)
+
+DEPENDENCIES:
+  - mobdebug (from `../../tools/mobdebug`)
+  - wax (from `../../`)
+
+EXTERNAL SOURCES:
+  mobdebug:
+    :path: "../../tools/mobdebug"
+  wax:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  mobdebug: dd9bc38c28d658c6c7ca231ad9c6b4f285c61e01
+  wax: 6974bdc27bc201389b967878f541f42e0734f8a4
+
+PODFILE CHECKSUM: 1d3c9053a926cb62903fbec20c4d11cd3c96df3a
+
+COCOAPODS: 1.16.2

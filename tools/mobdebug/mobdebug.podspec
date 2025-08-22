@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
 
   #  When using multiple platforms
-  s.ios.deployment_target = '4.3'
+  s.ios.deployment_target = '15.0'
 
   s.source_files  = 'mobdebug/*.{h,m,c}', 'mobdebug/luasocket/*.{h,m,c}'
 

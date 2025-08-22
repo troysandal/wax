@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
 
   #  When using multiple platforms
-  s.ios.deployment_target = '4.3'
+  s.ios.deployment_target = '15.0'
 
   s.source_files  = 'lib/*.{h,m}', 'lib/adaptation/*.{h,m}','lib/lua/*.{h,m,c}', 'lib/extensions/block/*.{h,m}', 'lib/extensions/capi/**/*.{h,m,c}', 'lib/extensions/CGAffine/*.{h,m}','lib/extensions/CGContext/*.{h,m}','lib/extensions/filesystem/*.{h,m}' ,'lib/extensions/HTTP/*.{h,m}','lib/extensions/ivar/*.{h,m}','lib/extensions/json/**/**/*.{h,m,c}','lib/extensions/memory/*.{h,m,c}','lib/extensions/SQLite/**/*.{h,m}','lib/extensions/xml/**/*.{h,m}'
 

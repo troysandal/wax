@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1640"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "006181B81BCF732B00B9F155"
-               BuildableName = "LuaCodeDebug.app"
-               BlueprintName = "LuaCodeDebug"
-               ReferencedContainer = "container:LuaCodeDebug.xcodeproj">
+               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+               BuildableName = "MapKitExample.app"
+               BlueprintName = "MapKitExample"
+               ReferencedContainer = "container:MapKitExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,18 +27,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006181B81BCF732B00B9F155"
-            BuildableName = "LuaCodeDebug.app"
-            BlueprintName = "LuaCodeDebug"
-            ReferencedContainer = "container:LuaCodeDebug.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <Testables>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -54,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006181B81BCF732B00B9F155"
-            BuildableName = "LuaCodeDebug.app"
-            BlueprintName = "LuaCodeDebug"
-            ReferencedContainer = "container:LuaCodeDebug.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "MapKitExample.app"
+            BlueprintName = "MapKitExample"
+            ReferencedContainer = "container:MapKitExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "006181B81BCF732B00B9F155"
-            BuildableName = "LuaCodeDebug.app"
-            BlueprintName = "LuaCodeDebug"
-            ReferencedContainer = "container:LuaCodeDebug.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "MapKitExample.app"
+            BlueprintName = "MapKitExample"
+            ReferencedContainer = "container:MapKitExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

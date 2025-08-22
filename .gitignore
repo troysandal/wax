@@ -5,7 +5,4 @@ wax.framework
 mobdebug.framework
 xcuserdata
 .DS_Store
-*.xcworkspacedata
-*.xcuserdata
-*.xccheckout
 Pods/

@@ -1,7 +1,7 @@
 build/
 *.pbxuser
 *.perspectivev3
-wax.framework
+wax.xcframework
 mobdebug.framework
 xcuserdata
 .DS_Store

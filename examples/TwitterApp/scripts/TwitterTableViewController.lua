@@ -8,7 +8,7 @@ function init(self)
 end
 
 function viewDidLoad(self)
-  wax.http.request{"http://search.twitter.com/trends.json", callback = function(json, response)
+  wax.http.request{"https://search.twitter.com/trends.json", callback = function(json, response)
     if response and response:statusCode() == 200 then
       self.trends = json["trends"]
     end

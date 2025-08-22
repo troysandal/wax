@@ -1,14 +1,16 @@
 PODS:
-  - wax (1.0.0)
+  - wax (1.2.1)
 
 DEPENDENCIES:
   - wax (from `../../../`)
 
 EXTERNAL SOURCES:
   wax:
-    :path: ../../../
+    :path: "../../../"
 
 SPEC CHECKSUMS:
-  wax: 2b714799fce79f34bf77e31cd845024e62e82da2
+  wax: 6974bdc27bc201389b967878f541f42e0734f8a4
 
-COCOAPODS: 0.35.0
+PODFILE CHECKSUM: bae68af926c16ee96ae2bbffc32fcceba8a2ac61
+
+COCOAPODS: 1.16.2

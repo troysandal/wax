@@ -20,25 +20,18 @@
 #import "wax_stdlib.h"
 
 #import "lauxlib.h"
-#import "lobject.h"
 #import "lualib.h"
 #import "wax_define.h"
 #import "wax_memory.h"
+#import "wax_config.h"
+#import "wax_block_call.h"
+
 static void addGlobals(lua_State *L);
 static int waxRoot(lua_State *L);
 static int waxPrint(lua_State *L);
 static int tolua(lua_State *L);
 static int toobjc(lua_State *L);
 static int exitApp(lua_State *L);
-
-extern int luaCallBlockWithParamsTypeArray(lua_State *L);
-extern int luaCallBlockWithParamsTypeEncoding(lua_State *L);
-extern int luaCallBlock(lua_State *L);
-
-extern int luaSetWaxConfig(lua_State *L);
-static int waxGetAddress(lua_State *L);
-static int waxDereference(lua_State *L);
-static int waxGetInstancePointer(lua_State *L);
 
 //runtime error
 static void (*wax_luaRuntimeErrorHandler)(NSString *reason, BOOL willExit);
@@ -47,9 +40,18 @@ static lua_State *currentL;
 lua_State *wax_currentLuaState() {
     
     if (!currentL) 
-        currentL = lua_open();
+        currentL = luaL_newstate();
     
     return currentL;
+}
+
+// Allow external set of Lua environment for integration
+// into systems which already have a Lua system built in.
+static bool usingExternalLuaState=FALSE;
+
+void wax_setCurrentLuaState(lua_State* L) {
+    currentL=L;
+    usingExternalLuaState=true;
 }
 
 void wax_uncaughtExceptionHandler(NSException *e) {
@@ -84,9 +86,13 @@ void wax_setup() {
     [fileManager changeCurrentDirectoryPath:[[NSBundle mainBundle] bundlePath]];
     
     lua_State *L = wax_currentLuaState();
+#if !defined(LUA_IS_LUAU)
+    // Some custome Luau's don't have lua_atpanic.
+    // TODO: Find a better way to detect lua_atpanic.
 	lua_atpanic(L, &wax_panic);
-    
-    luaL_openlibs(L); 
+#endif
+    if (!usingExternalLuaState)
+        luaL_openlibs(L);
 
 	luaopen_wax_class(L);
     luaopen_wax_instance(L);
@@ -130,16 +136,9 @@ void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
 		size_t stdlibSize = strlen(stdlib);
 	#endif
     
-//    for(int i = 0; i < stdlibSize; ++i){
-//        printf("%d,", stdlib[i]);
-//    }
-    
 	if (luaL_loadbuffer(L, stdlib, stdlibSize, "loading wax stdlib") || lua_pcall(L, 0, LUA_MULTRET, 0)) {
 		fprintf(stderr,"Error opening wax scripts: %s\n", lua_tostring(L,-1));
 	}
-//    if (luaL_loadfile(L, "/Users/junzhan/Documents/macpro-data/project/all_github/wax/examples/States_nof/wax.dat副本") || lua_pcall(L, 0, LUA_MULTRET, 0)) {
-//        fprintf(stderr,"Error opening wax scripts: %s\n", lua_tostring(L,-1));
-//    }
     
 	// Run Tests or the REPL?
 	// ----------------------
@@ -149,14 +148,14 @@ void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
 		if (luaL_dostring(L, "require 'tests'") != 0) {
 			fprintf(stderr,"Fatal error running tests: %s\n", lua_tostring(L,-1));
         }
-//        exit(1);
+       exit(1);
     }
 	else if ([[env objectForKey:@"WAX_REPL"] isEqual:@"YES"]) {
 		printf("Starting REPL\n");
 		if (luaL_dostring(L, "require 'wax.repl'") != 0) {
             fprintf(stderr,"Fatal error starting the REPL: %s\n", lua_tostring(L,-1));
         }
-//		exit(1);
+		exit(1);
 	}
 	else {
 		// Load app
@@ -192,8 +191,11 @@ void wax_startWithServer() {
 
 void wax_end() {
     [wax_gc stop];
-    lua_close(wax_currentLuaState());
-    currentL = 0;
+    // Don't close the LUA state if we don't own it
+    if (!usingExternalLuaState) {
+        lua_close(wax_currentLuaState());
+        currentL = 0;
+    }
 }
 
 static void addGlobals(lua_State *L) {

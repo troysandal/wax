@@ -82,6 +82,8 @@
 */
 
 // BEGIN WAX PATCH
+// Wax is opinionated about from where it loads scripts.  
+// Overriding here ensures both wax and lua use the same path.
 #ifndef WAX_SCRIPTS_DIR
 #define WAX_SCRIPTS_DIR "scripts"
 #endif

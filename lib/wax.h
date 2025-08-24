@@ -6,6 +6,20 @@
 
 #define WAX_VERSION 0.93
 
+#ifdef LUA_IS_LUAU
+#define wax_lua_pushcfunction(L, fn, debugname) lua_pushcfunction(L, fn, #fn)
+
+// In Lua 5.x we override these in luaconf.h. Luau's luaconf.h omits them
+// so we define them here to ensure we compile.
+#define WAX_SCRIPTS_DIR "scripts"
+#define LUA_PATH_DEFAULT WAX_SCRIPTS_DIR "/?.lua;" WAX_SCRIPTS_DIR "/?/init.lua;" WAX_SCRIPTS_DIR "/?.dat;"\
+                         "?.lua;" "?/init.lua;" "?.dat;"
+#define LUA_CPATH_DEFAULT ""
+#define WAX_LUA_INIT_SCRIPT "AppDelegate"
+
+#endif
+
+
 
 //just start wax with no script, and no extension. (can be used in swift)
 void wax_startWithNil();
@@ -48,3 +62,5 @@ typedef  void (*WaxLuaRuntimeErrorHandler)(NSString *reason, BOOL willExit);
 void wax_setLuaRuntimeErrorHandler(WaxLuaRuntimeErrorHandler handler);
 
 WaxLuaRuntimeErrorHandler wax_getLuaRuntimeErrorHandler();
+
+void wax_setCurrentLuaState(lua_State* L);

@@ -33,7 +33,7 @@ static void sqlite_push_column_value(sqlite3_stmt *statement, int columnIndex);
 // I want to just create a subthread, but can't because of the way I hacked the Lua GC
 + (lua_State *)operationLuaState {
     static lua_State *L;
-    if (!L) L = lua_open();
+    if (!L) L = luaL_newstate();
 
     return L;
 }

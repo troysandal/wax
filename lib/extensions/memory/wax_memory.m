@@ -16,10 +16,8 @@
 #import "wax_server.h"
 
 #import "lauxlib.h"
-#import "lobject.h"
 #import "lualib.h"
 #import "wax_define.h"
-//#import <Foundation/Foundation.h>
 
 //x = &y. get address of object.
 static int waxGetAddress(lua_State *L) {

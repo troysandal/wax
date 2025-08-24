@@ -19,4 +19,4 @@
 int luaSetWaxConfig(lua_State *L);
 
 
-NSDictionary *luaGetWaxConfig();
+NSDictionary *luaGetWaxConfig(void);

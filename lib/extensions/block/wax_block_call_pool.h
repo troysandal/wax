@@ -11,4 +11,4 @@
 #import <Foundation/Foundation.h>
 extern void *lua_call_bb(lua_State *L, int index, char typeEncoding);
 
-NSDictionary *wax_block_call_pool();
+NSDictionary *wax_block_call_pool(void);

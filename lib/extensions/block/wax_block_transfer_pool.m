@@ -5105,7 +5105,7 @@ static id lua_double_block_7ddddddd(NSString *paramsTypeEncoding,id self){
 }
 //total:510
 
-NSDictionary *wax_block_transfer_pool(){
+NSDictionary *wax_block_transfer_pool(void){
     static NSDictionary *dict = nil;
     if(!dict){
         dict = @{    @"q":[NSValue valueWithPointer:lua_LongLong_block_0],    @"qq":[NSValue valueWithPointer:lua_LongLong_block_1q],

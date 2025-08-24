@@ -8,4 +8,4 @@
 
 #import <Foundation/Foundation.h>
 
-NSRecursiveLock* wax_globalLock();
+NSRecursiveLock* wax_globalLock(void);

@@ -12,7 +12,7 @@
 /**
  *  return value and param are all void
  */
--(void (^)())luaVoidBlock;
+-(void (^)(void))luaVoidBlock;
 
 
 /**

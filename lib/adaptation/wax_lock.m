@@ -9,7 +9,7 @@
 #import "wax_lock.h"
 //#import <Foundation/Foundation.h>
 
-NSRecursiveLock* wax_globalLock(){
+NSRecursiveLock* wax_globalLock(void){
     static NSRecursiveLock *globalLock = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

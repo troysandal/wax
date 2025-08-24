@@ -8,7 +8,7 @@ return returnBuffer;\
 
 
 static void* lua_call_ib0(lua_State *L, id block, int st, const char *te){
-    int (^y)() = block;
+    int (^y)(void) = block;
     int res = y();
     REURN_BUFFER(int)
 }
@@ -1713,7 +1713,7 @@ static void* lua_call_ib4dddd(lua_State *L, id block, int st, const char *te){
     REURN_BUFFER(int)
 }
 static void* lua_call_qb0(lua_State *L, id block, int st, const char *te){
-    LongLong (^y)() = block;
+    LongLong (^y)(void) = block;
     LongLong res = y();
     REURN_BUFFER(LongLong)
 }
@@ -3418,7 +3418,7 @@ static void* lua_call_qb4dddd(lua_State *L, id block, int st, const char *te){
     REURN_BUFFER(LongLong)
 }
 static void* lua_call_fb0(lua_State *L, id block, int st, const char *te){
-    float (^y)() = block;
+    float (^y)(void) = block;
     float res = y();
     REURN_BUFFER(float)
 }
@@ -5123,7 +5123,7 @@ static void* lua_call_fb4dddd(lua_State *L, id block, int st, const char *te){
     REURN_BUFFER(float)
 }
 static void* lua_call_db0(lua_State *L, id block, int st, const char *te){
-    double (^y)() = block;
+    double (^y)(void) = block;
     double res = y();
     REURN_BUFFER(double)
 }
@@ -6829,7 +6829,7 @@ static void* lua_call_db4dddd(lua_State *L, id block, int st, const char *te){
 }
 //total:1364
 
-NSDictionary *wax_block_call_pool(){
+NSDictionary *wax_block_call_pool(void){
     static NSDictionary *dict = nil;
     if(!dict){
         dict = @{

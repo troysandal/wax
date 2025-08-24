@@ -37,7 +37,7 @@ static int exitApp(lua_State *L);
 static void (*wax_luaRuntimeErrorHandler)(NSString *reason, BOOL willExit);
 
 static lua_State *currentL;
-lua_State *wax_currentLuaState() {
+lua_State *wax_currentLuaState(void) {
     
     if (!currentL) 
         currentL = luaL_newstate();
@@ -79,7 +79,7 @@ int wax_panic(lua_State *L) {
 
 lua_CFunction lua_atpanic (lua_State *L, lua_CFunction panicf);
 
-void wax_setup() {
+void wax_setup(void) {
 //	NSSetUncaughtExceptionHandler(&wax_uncaughtExceptionHandler);//let it catched by outside crash handler
 	
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -103,7 +103,7 @@ void wax_setup() {
 	[wax_gc start];
 }
 
-void wax_startWithNil(){
+void wax_startWithNil(void){
     wax_start(nil, nil);
 }
 
@@ -170,7 +170,7 @@ void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
 
 }
 
-void wax_startWithServer() {		
+void wax_startWithServer(void) {
 	wax_setup();
     
 #ifndef WAX_TARGET_OS_WATCH
@@ -189,7 +189,7 @@ void wax_startWithServer() {
 	[WaxServer start];
 }
 
-void wax_end() {
+void wax_end(void) {
     [wax_gc stop];
     // Don't close the LUA state if we don't own it
     if (!usingExternalLuaState) {
@@ -365,6 +365,6 @@ int wax_runLuaByteCode(NSData *data, NSString *name){
 void wax_setLuaRuntimeErrorHandler(void (*handler)(NSString *reason, BOOL willExit)){
     wax_luaRuntimeErrorHandler = handler;
 }
-WaxLuaRuntimeErrorHandler wax_getLuaRuntimeErrorHandler(){
+WaxLuaRuntimeErrorHandler wax_getLuaRuntimeErrorHandler(void){
     return wax_luaRuntimeErrorHandler;
 }

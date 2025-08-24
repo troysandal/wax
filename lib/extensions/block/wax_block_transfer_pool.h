@@ -9,4 +9,4 @@
 #import <Foundation/Foundation.h>
 extern void* luaBlockARM64ReturnBufferWithParamsTypeEncoding(NSString *paramsTypeEncoding, id self, ...);
 
-NSDictionary *wax_block_transfer_pool();
+NSDictionary *wax_block_transfer_pool(void);

@@ -35,6 +35,6 @@ int luaSetWaxConfig(lua_State *L){
     return 0;
 }
 
-NSDictionary *luaGetWaxConfig(){
+NSDictionary *luaGetWaxConfig(void){
     return configDict;
 }

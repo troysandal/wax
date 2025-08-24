@@ -15,7 +15,7 @@
 #import "wax_block.h"
 #import "wax_block_transfer_pool.h"
 #import "wax_define.h"
-extern lua_State *wax_currentLuaState();
+extern lua_State *wax_currentLuaState(void);
 
 #define LUA_BLOCK_CALL_ARM32_RETURN_BUFFER(paramsTypeEncoding, type, q) \
 va_list args_copy;\
@@ -39,7 +39,7 @@ return res;\
 
 #pragma mark return void & param void
 //all void
--(void (^)())luaVoidBlock {//blockzh
+-(void (^)(void))luaVoidBlock {//blockzh
     return [[^() {
         [wax_globalLock() lock];
         lua_State *L = wax_currentLuaState();
@@ -51,7 +51,7 @@ return res;\
 
 
 #pragma mark return any & param void
--(LongLong (^)())luaBlockReturnLongLongWithVoidParam:(NSString *)paramsTypeEncoding {
+-(LongLong (^)(void))luaBlockReturnLongLongWithVoidParam:(NSString *)paramsTypeEncoding {
     return [[^() {
         [wax_globalLock() lock];
         lua_State *L = wax_currentLuaState();
@@ -97,7 +97,7 @@ return res;\
     } copy] autorelease];
 }
 
--(float (^)())luaBlockReturnFloatWithVoidParam:(NSString *)paramsTypeEncoding {
+-(float (^)(void))luaBlockReturnFloatWithVoidParam:(NSString *)paramsTypeEncoding {
     return [[^() {
         [wax_globalLock() lock];
         lua_State *L = wax_currentLuaState();
@@ -122,7 +122,7 @@ return res;\
     } copy] autorelease];
 }
 
--(double (^)())luaBlockReturnDoubleWithVoidParam:(NSString *)paramsTypeEncoding {
+-(double (^)(void))luaBlockReturnDoubleWithVoidParam:(NSString *)paramsTypeEncoding {
     return [[^() {
         [wax_globalLock() lock];
         lua_State *L = wax_currentLuaState();

@@ -20,7 +20,7 @@ void *lua_call_bb(lua_State *L, int index, char typeEncoding){
     char tempTypeEncoding[3] = {0};//at least 3 byte, or wax_simplifyTypeDescription maybe out of bounds
     tempTypeEncoding[0] = typeEncoding;
     void *returnBuffer = wax_copyToObjc(L, tempTypeEncoding, index, nil);
-    //    free(returnBuffer);//Release will cause loss of data. TODO
+    //    free(returnBuffer);//TODO: Release will cause loss of data. 
     return returnBuffer;
 }
 

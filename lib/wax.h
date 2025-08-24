@@ -22,21 +22,21 @@
 
 
 //just start wax with no script, and no extension. (can be used in swift)
-void wax_startWithNil();
+void wax_startWithNil(void);
 
 //setup lua, and load wax stdlib
 void wax_start(char *initScript, lua_CFunction extensionFunctions, ...);
 
 //start with wax server
-void wax_startWithServer();
+void wax_startWithServer(void);
 
 //setup lua
-void wax_setup();
+void wax_setup(void);
 
 
-void wax_end();
+void wax_end(void);
 
-lua_State *wax_currentLuaState();
+lua_State *wax_currentLuaState(void);
 
 void luaopen_wax(lua_State *L);
 
@@ -61,6 +61,6 @@ typedef  void (*WaxLuaRuntimeErrorHandler)(NSString *reason, BOOL willExit);
 
 void wax_setLuaRuntimeErrorHandler(WaxLuaRuntimeErrorHandler handler);
 
-WaxLuaRuntimeErrorHandler wax_getLuaRuntimeErrorHandler();
+WaxLuaRuntimeErrorHandler wax_getLuaRuntimeErrorHandler(void);
 
 void wax_setCurrentLuaState(lua_State* L);

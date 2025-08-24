@@ -489,8 +489,17 @@ static int methodClosure(lua_State *L) {
     
     NSMethodSignature *signature = [instance methodSignatureForSelector:selector];
     if (!signature) {
-        const char *className = [NSStringFromClass([instance class]) UTF8String];
-        luaL_error(L, "'%s' has no method selector '%s'", className, selectorName);
+        // Fix by AWB: Some methods that can be invoked by performSelector: actually return a nil
+        // method signature. This occurs if a method has been set up as forwarding to an
+        // alternate target. Before giving up see if forwarding is a potential solution.
+        //
+        NSObject *fwd=[instance forwardingTargetForSelector:selector];
+        if (fwd && (signature= [fwd methodSignatureForSelector:selector]))
+            instance = fwd;
+        else{
+            const char *className = [NSStringFromClass([instance class]) UTF8String];
+            luaL_error(L, "'%s' has no method selector '%s'", className, selectorName);
+        }
     }
     
     NSInvocation *invocation = nil;

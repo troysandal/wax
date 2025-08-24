@@ -7,16 +7,11 @@
 #define WAX_VERSION 0.93
 
 #ifdef LUA_IS_LUAU
-#define wax_lua_pushcfunction(L, fn, debugname) lua_pushcfunction(L, fn, #fn)
-
-// In Lua 5.x we override these in luaconf.h. Luau's luaconf.h omits them
-// so we define them here to ensure we compile.
-#define WAX_SCRIPTS_DIR "scripts"
-#define LUA_PATH_DEFAULT WAX_SCRIPTS_DIR "/?.lua;" WAX_SCRIPTS_DIR "/?/init.lua;" WAX_SCRIPTS_DIR "/?.dat;"\
-                         "?.lua;" "?/init.lua;" "?.dat;"
-#define LUA_CPATH_DEFAULT ""
-#define WAX_LUA_INIT_SCRIPT "AppDelegate"
-
+    // In Lua 5.x we add these and override 2 LUA defines in luaconf.h.
+    // Luau's luaconf.h omits them so we define these here to ensure
+    // wax projects compile / run.
+    #define WAX_SCRIPTS_DIR "scripts"
+    #define WAX_LUA_INIT_SCRIPT "AppDelegate"
 #endif
 
 

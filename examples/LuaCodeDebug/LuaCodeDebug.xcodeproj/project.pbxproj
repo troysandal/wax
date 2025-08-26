@@ -17,6 +17,7 @@
 		006181D91BCF78C900B9F155 /* TestDebugVC.lua in Resources */ = {isa = PBXBuildFile; fileRef = 006181D81BCF78C900B9F155 /* TestDebugVC.lua */; };
 		0526B09C2E57F0E400A0799E /* libmobdebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0526B09B2E57F0E400A0799E /* libmobdebug.a */; };
 		0526B09E2E57F0E400A0799E /* libwax.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0526B09D2E57F0E400A0799E /* libwax.a */; };
+		EB6035F59BA7C0970247214E /* libPods-LuaCodeDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A83B507F1A5E00CA0518EE /* libPods-LuaCodeDebug.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 			files = (
 				0526B09C2E57F0E400A0799E /* libmobdebug.a in Frameworks */,
 				0526B09E2E57F0E400A0799E /* libwax.a in Frameworks */,
+				EB6035F59BA7C0970247214E /* libPods-LuaCodeDebug.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

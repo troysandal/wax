@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,7 @@
 		00A41C3F1BE0A1A000D47270 /* WaxWatchExample WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 00A41C3E1BE0A1A000D47270 /* WaxWatchExample WatchKit App.app */; };
 		00A41C451BE0A1A000D47270 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00A41C431BE0A1A000D47270 /* Interface.storyboard */; };
 		00A41C471BE0A1A000D47270 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00A41C461BE0A1A000D47270 /* Assets.xcassets */; };
-		00A41C4E1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 00A41C4D1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		00A41C4E1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00A41C4D1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00A41C561BE0A1A000D47270 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41C551BE0A1A000D47270 /* InterfaceController.m */; };
 		00A41C591BE0A1A000D47270 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41C581BE0A1A000D47270 /* ExtensionDelegate.m */; };
 		00A41C5C1BE0A1A000D47270 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41C5B1BE0A1A000D47270 /* NotificationController.m */; };
@@ -86,7 +86,8 @@
 		00A41E651BE0A60F00D47270 /* wax_instance.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41D7E1BE0A60E00D47270 /* wax_instance.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00A41E671BE0A60F00D47270 /* wax_server.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41D801BE0A60E00D47270 /* wax_server.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00A41E691BE0A60F00D47270 /* wax_struct.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A41D831BE0A60E00D47270 /* wax_struct.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00C2C0091BF19A2900C592CB /* watch.lua in Resources */ = {isa = PBXBuildFile; fileRef = 00C2C0081BF19A2900C592CB /* watch.lua */; settings = {ASSET_TAGS = (); }; };
+		00C2C0091BF19A2900C592CB /* watch.lua in Resources */ = {isa = PBXBuildFile; fileRef = 00C2C0081BF19A2900C592CB /* watch.lua */; };
+		055D80262E5DE5200001F544 /* wax_memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 055D80242E5DE5200001F544 /* wax_memory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,15 +108,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00A41C6B1BE0A1A000D47270 /* Embed App Extensions */ = {
+		00A41C6B1BE0A1A000D47270 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				00A41C4E1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex in Embed App Extensions */,
+				00A41C4E1BE0A1A000D47270 /* WaxWatchExample WatchKit Extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		00A41C6F1BE0A1A000D47270 /* Embed Watch Content */ = {
@@ -287,6 +288,9 @@
 		00A41D821BE0A60E00D47270 /* wax_struct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax_struct.h; sourceTree = "<group>"; };
 		00A41D831BE0A60E00D47270 /* wax_struct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wax_struct.m; sourceTree = "<group>"; };
 		00C2C0081BF19A2900C592CB /* watch.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = watch.lua; sourceTree = "<group>"; };
+		055D80222E5DE4950001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wax_luau.h; sourceTree = "<group>"; };
+		055D80232E5DE5200001F544 /* wax_memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wax_memory.h; sourceTree = "<group>"; };
+		055D80242E5DE5200001F544 /* wax_memory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wax_memory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +398,7 @@
 		00A41CB81BE0A60E00D47270 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				055D80222E5DE4950001F544 /* wax_luau.h */,
 				00A41CB91BE0A60E00D47270 /* adaptation */,
 				00A41CCB1BE0A60E00D47270 /* extensions */,
 				00A41D201BE0A60E00D47270 /* lua */,
@@ -433,6 +438,7 @@
 		00A41CCB1BE0A60E00D47270 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				055D80252E5DE5200001F544 /* memory */,
 				00A41CCC1BE0A60E00D47270 /* block */,
 				00A41CD91BE0A60E00D47270 /* capi */,
 				00A41CF61BE0A60E00D47270 /* HTTP */,
@@ -629,6 +635,15 @@
 			path = Script;
 			sourceTree = "<group>";
 		};
+		055D80252E5DE5200001F544 /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				055D80232E5DE5200001F544 /* wax_memory.h */,
+				055D80242E5DE5200001F544 /* wax_memory.m */,
+			);
+			path = memory;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -656,7 +671,7 @@
 			buildConfigurationList = 00A41C6C1BE0A1A000D47270 /* Build configuration list for PBXNativeTarget "WaxWatchExample WatchKit App" */;
 			buildPhases = (
 				00A41C3C1BE0A1A000D47270 /* Resources */,
-				00A41C6B1BE0A1A000D47270 /* Embed App Extensions */,
+				00A41C6B1BE0A1A000D47270 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -691,7 +706,8 @@
 		00A41C1F1BE0A1A000D47270 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1640;
 				ORGANIZATIONNAME = test.jz.com;
 				TargetAttributes = {
 					00A41C261BE0A1A000D47270 = {
@@ -707,7 +723,7 @@
 			};
 			buildConfigurationList = 00A41C221BE0A1A000D47270 /* Build configuration list for PBXProject "WaxWatchExample" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -817,6 +833,7 @@
 				00A41DBD1BE0A60E00D47270 /* tolua_event.c in Sources */,
 				00A41DD31BE0A60E00D47270 /* NSObject+TBIvarAccess.m in Sources */,
 				00A41DDB1BE0A60E00D47270 /* yajl_alloc.c in Sources */,
+				055D80262E5DE5200001F544 /* wax_memory.m in Sources */,
 				00A41E1F1BE0A60E00D47270 /* ltablib.c in Sources */,
 				00A41E691BE0A60F00D47270 /* wax_struct.m in Sources */,
 				00A41DF91BE0A60E00D47270 /* ldebug.c in Sources */,
@@ -889,17 +906,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -907,6 +936,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -921,7 +951,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -932,17 +962,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -950,6 +992,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -958,7 +1001,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -975,13 +1018,18 @@
 					"WAX_TARGET_OS_WATCH=1",
 				);
 				INFOPLIST_FILE = "WaxWatchExample WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jz.test.WaxWatchExample.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Debug;
 		};
@@ -991,13 +1039,18 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				GCC_PREPROCESSOR_DEFINITIONS = "WAX_TARGET_OS_WATCH=1";
 				INFOPLIST_FILE = "WaxWatchExample WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jz.test.WaxWatchExample.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Release;
 		};
@@ -1012,7 +1065,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Debug;
 		};
@@ -1027,7 +1080,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 9.6;
 			};
 			name = Release;
 		};
@@ -1035,8 +1088,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				INFOPLIST_FILE = WaxWatchExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jz.test.WaxWatchExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1046,8 +1104,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				INFOPLIST_FILE = WaxWatchExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jz.test.WaxWatchExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

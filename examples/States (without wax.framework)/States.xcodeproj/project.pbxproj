@@ -245,6 +245,7 @@
 		04A618B712CA7AC9004ADB76 /* ProtocolLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolLoader.h; sourceTree = "<group>"; };
 		04A618D712CA83F0004ADB76 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		04A618F412CA84FC004ADB76 /* AppDelegate.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppDelegate.lua; sourceTree = "<group>"; };
+		055D80202E5DE3370001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wax_luau.h; path = /Users/troy/depot/wax/BhWax/wax/lib/wax_luau.h; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* States.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = States.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -351,7 +352,6 @@
 		04A617D012CA7AB6004ADB76 /* wax */ = {
 			isa = PBXGroup;
 			children = (
-				00E9B15E1AEFB173004EDF30 /* wax_define.h */,
 				00E9B14A1AEFB0C3004EDF30 /* block */,
 				00E9B1551AEFB0C3004EDF30 /* capi */,
 				00E9B13F1AEFB0B7004EDF30 /* adaptation */,
@@ -362,12 +362,14 @@
 				04A6185812CA7AB6004ADB76 /* wax.m */,
 				04A6185912CA7AB6004ADB76 /* wax_class.h */,
 				04A6185A12CA7AB6004ADB76 /* wax_class.m */,
+				00E9B15E1AEFB173004EDF30 /* wax_define.h */,
 				04A6185B12CA7AB6004ADB76 /* wax_gc.h */,
 				04A6185C12CA7AB6004ADB76 /* wax_gc.m */,
 				04A6185D12CA7AB6004ADB76 /* wax_helpers.h */,
 				04A6185E12CA7AB6004ADB76 /* wax_helpers.m */,
 				04A6185F12CA7AB6004ADB76 /* wax_instance.h */,
 				04A6186012CA7AB6004ADB76 /* wax_instance.m */,
+				055D80202E5DE3370001F544 /* wax_luau.h */,
 				04A6186112CA7AB6004ADB76 /* wax_server.h */,
 				04A6186212CA7AB6004ADB76 /* wax_server.m */,
 				04A6186312CA7AB6004ADB76 /* wax_stdlib.h */,

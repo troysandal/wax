@@ -6,16 +6,6 @@
 
 #define WAX_VERSION 0.93
 
-#ifdef LUA_IS_LUAU
-    // In Lua 5.x we add these and override 2 LUA defines in luaconf.h.
-    // Luau's luaconf.h omits them so we define these here to ensure
-    // wax projects compile / run.
-    #define WAX_SCRIPTS_DIR "scripts"
-    #define WAX_LUA_INIT_SCRIPT "AppDelegate"
-#endif
-
-
-
 //just start wax with no script, and no extension. (can be used in swift)
 void wax_startWithNil(void);
 
@@ -38,6 +28,7 @@ void luaopen_wax(lua_State *L);
 #pragma mark add by junzhan
 
 
+#if !defined(LUA_IS_LUAU)
 //you should call wax_start before these function.
 // run lua string.
 int wax_runLuaString(const char *script);
@@ -47,7 +38,7 @@ int wax_runLuaByteCode(NSData *data, NSString *name);
 
 //run lua file
 int wax_runLuaFile(const char *filePath);
-
+#endif
 
 
 

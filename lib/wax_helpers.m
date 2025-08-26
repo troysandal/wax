@@ -12,6 +12,7 @@
 #import "lauxlib.h"
 #import "wax_block_transfer.h"
 
+#import "wax_luau.h"
 
 void wax_printStack(lua_State *L) {
     int i;

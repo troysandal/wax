@@ -16,6 +16,7 @@
 #import "wax_block_call.h"
 
 #import "lauxlib.h"
+#import "wax_luau.h"
 
 static int __index(lua_State *L);
 static int __newindex(lua_State *L);

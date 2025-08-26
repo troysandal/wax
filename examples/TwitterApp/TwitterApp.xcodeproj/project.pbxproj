@@ -244,6 +244,7 @@
 		04A6186512CA7AB6004ADB76 /* wax_struct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wax_struct.m; sourceTree = "<group>"; };
 		04A618B712CA7AC9004ADB76 /* ProtocolLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolLoader.h; sourceTree = "<group>"; };
 		04A618D712CA83F0004ADB76 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		055D80212E5DE4560001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wax_luau.h; path = /Users/troy/depot/wax/BhWax/wax/lib/wax_luau.h; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* TwitterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -377,6 +378,7 @@
 				04A6185E12CA7AB6004ADB76 /* wax_helpers.m */,
 				04A6185F12CA7AB6004ADB76 /* wax_instance.h */,
 				04A6186012CA7AB6004ADB76 /* wax_instance.m */,
+				055D80212E5DE4560001F544 /* wax_luau.h */,
 				04A6186112CA7AB6004ADB76 /* wax_server.h */,
 				04A6186212CA7AB6004ADB76 /* wax_server.m */,
 				04A6186312CA7AB6004ADB76 /* wax_stdlib.h */,

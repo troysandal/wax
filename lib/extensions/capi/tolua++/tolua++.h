@@ -44,7 +44,8 @@ extern "C" {
 typedef int lua_Object;
 
 #include "lua.h"
-#include "lauxlib.h"
+
+#include "wax_luau.h"
 
 struct tolua_Error
 {

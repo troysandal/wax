@@ -164,6 +164,7 @@
 		00A41CB51BE0A32E00D47270 /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 00A41B001BE073D600D47270 /* lvm.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00A41CB61BE0A32E00D47270 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 00A41B021BE073D600D47270 /* lzio.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00A41CB71BE0A32E00D47270 /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 00A41B041BE073D600D47270 /* print.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		055D7D0B2E5D3A010001F544 /* wax_luau.h in Headers */ = {isa = PBXBuildFile; fileRef = 055D7D0A2E5D3A010001F544 /* wax_luau.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -286,6 +287,7 @@
 		00A41C771BE0A2C300D47270 /* libwax.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwax.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A41C791BE0A2C300D47270 /* WaxWatchLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaxWatchLib.h; sourceTree = "<group>"; };
 		00A41C7B1BE0A2C300D47270 /* WaxWatchLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaxWatchLib.m; sourceTree = "<group>"; };
+		055D7D0A2E5D3A010001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wax_luau.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -342,6 +344,7 @@
 		00A41A651BE073D600D47270 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				055D7D0A2E5D3A010001F544 /* wax_luau.h */,
 				00A41A661BE073D600D47270 /* adaptation */,
 				00A41A7A1BE073D600D47270 /* extensions */,
 				00A41ACF1BE073D600D47270 /* lua */,
@@ -540,6 +543,7 @@
 				00A41B4D1BE073D600D47270 /* wax_block_transfer.h in Headers */,
 				00A41BAF1BE073D600D47270 /* lstring.h in Headers */,
 				00A41BA81BE073D600D47270 /* lopcodes.h in Headers */,
+				055D7D0B2E5D3A010001F544 /* wax_luau.h in Headers */,
 				00A41BA01BE073D600D47270 /* llimits.h in Headers */,
 				00A41BDC1BE073D600D47270 /* wax_class.h in Headers */,
 				00A41BB71BE073D600D47270 /* luaconf.h in Headers */,

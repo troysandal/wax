@@ -252,6 +252,7 @@
 		0538B4C22E53DD4700470547 /* wax_memory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wax_memory.m; sourceTree = "<group>"; };
 		0538B4C52E53DD6500470547 /* wax_block_description.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wax_block_description.h; sourceTree = "<group>"; };
 		0538B4C62E53DD6500470547 /* wax_block_description.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wax_block_description.m; sourceTree = "<group>"; };
+		055D7D042E5D38940001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wax_luau.h; path = /Users/troy/depot/wax/BhWax/wax/lib/wax_luau.h; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -324,6 +325,7 @@
 		043E60C6113C3DA5007A6104 /* wax */ = {
 			isa = PBXGroup;
 			children = (
+				055D7D042E5D38940001F544 /* wax_luau.h */,
 				00DAC0EE1AF0B5CF00206217 /* adaptation */,
 				043E60CA113C3DA5007A6104 /* build-scripts */,
 				043E60CD113C3DA5007A6104 /* extensions */,

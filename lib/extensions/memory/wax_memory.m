@@ -19,6 +19,8 @@
 #import "lualib.h"
 #import "wax_define.h"
 
+#import "wax_luau.h"
+
 //x = &y. get address of object.
 static int waxGetAddress(lua_State *L) {
     wax_instance_userdata *instanceUserdata = (wax_instance_userdata *)luaL_checkudata(L, 1, WAX_INSTANCE_METATABLE_NAME);

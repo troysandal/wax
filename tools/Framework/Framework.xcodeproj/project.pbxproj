@@ -237,6 +237,7 @@
 				lib/extensions/xml/wax_xml.h,
 				lib/lua/lua.h,
 				lib/lua/luaconf.h,
+				lib/wax_luau.h,
 				lib/wax.h,
 			);
 			target = 0524C1EF2E5792650034275B /* Wax */;
@@ -920,6 +921,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -959,6 +961,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};

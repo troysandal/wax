@@ -12,6 +12,8 @@
 #import "lua.h"
 #import "lauxlib.h"
 
+#import "wax_luau.h"
+
 #define LABELED_STRUCT_TABLE_NAME "labeledStructs"
 
 static int __index(lua_State *L);

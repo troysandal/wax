@@ -107,3 +107,23 @@ int wax_pcall(lua_State *L, int argumentCount, int returnCount);
 SEL wax_selectorWithPrefix(SEL selector, const char *prefix);
 
 BOOL wax_stringHasPrefix(const char *text, const char *prefix);
+
+// Lua 5.2 removed support for the xxxfenv() methods and Luau stopped 
+// supporting userdata in xxxfenv().  Wax relied on this so below 
+// is a workaround that support Lua 5.1, 5.2+ and Luau.
+void wax_getEnvironment(lua_State *L, int index);
+void wax_setEnvironment(lua_State *L, int index);
+
+// There's no define indicating Luau but there is one indicating Lua.
+// If LUA_VERSION_NUM is present it's Lua, otherwise it's Luau.
+#if !defined(LUA_VERSION_NUM) || LUA_VERSION_NUM >= 502
+    #pragma message "Using Lua 5.2+ or Luau"
+    // Luau && Lua 5.2+ - use our helper functions
+    #define wax_setfenv(L, index) wax_setEnvironment(L, index)
+    #define wax_getfenv(L, index) wax_getEnvironment(L, index)
+#else
+    #pragma message "Using Lua 5.1"
+    // Lua 5.1 - use native functions
+    #define wax_setfenv(L, index) lua_setfenv(L, index)
+    #define wax_getfenv(L, index) lua_getfenv(L, index)
+#endif

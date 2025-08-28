@@ -146,7 +146,7 @@ static void sqlite_push_column_value(sqlite3_stmt *statement, int columnIndex);
     
     // If a callback exists, call it!
     wax_instance_pushUserdata(L, self);
-    lua_getfenv(L, -1); // get env
+    wax_getfenv(L, -1); // get env
     lua_getfield(L, -1, WAX_SQLITE_CALLBACK_NAME);
         
     bool hasCallback = !lua_isnil(L, -1);

@@ -26,7 +26,7 @@
 #import "wax_config.h"
 #import "wax_block_call.h"
 
-#ifdef LUA_IS_LUAU
+#if !defined(LUA_VERSION_NUM)
     // In Lua 5.x we add these and override 2 LUA defines in luaconf.h.
     // Luau's luaconf.h omits them so we define these here to ensure
     // wax projects compile / run.
@@ -98,8 +98,8 @@ void wax_setup(void) {
     [fileManager changeCurrentDirectoryPath:[[NSBundle mainBundle] bundlePath]];
     
     lua_State *L = wax_currentLuaState();
-#if !defined(LUA_IS_LUAU)
-    // Some custome Luau's don't have lua_atpanic.
+#if defined(LUA_VERSION_NUM)
+    // Some custom Luau's don't have lua_atpanic.
     // TODO: Find a better way to detect lua_atpanic.
 	lua_atpanic(L, &wax_panic);
 #endif
@@ -119,7 +119,7 @@ void wax_startWithNil(void){
     wax_start(nil, nil);
 }
 
-#if !defined(LUA_IS_LUAU)
+#if defined(LUA_VERSION_NUM)
 void wax_runInitialScript(lua_State *L, char* initScript) {
     // Load stdlib
     // ---------------
@@ -185,13 +185,13 @@ void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
     
     // Luau doesn't have the facilites to load and compile code like Lua 5x does.
     // Adding that functionality has not been researched.
-    #if !defined(LUA_IS_LUAU)
+    #if defined(LUA_VERSION_NUM)
         wax_runInitialScript(L, initScript);
     #endif
 }
 
 void wax_startWithServer(void) {
-#if !defined(LUA_IS_LUAU)
+#if defined(LUA_VERSION_NUM)
     wax_setup();
     
 #ifndef WAX_TARGET_OS_WATCH
@@ -353,7 +353,7 @@ static int exitApp(lua_State *L) {
 
 
 #pragma mark run
-#if !defined(LUA_IS_LUAU)
+#if defined(LUA_VERSION_NUM)
 int wax_runLuaString(const char *script){
     [wax_globalLock() lock];
     int i = luaL_dostring(wax_currentLuaState(), script);

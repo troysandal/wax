@@ -32,6 +32,7 @@ static int superMethodClosure(lua_State *L);
 static int customInitMethodClosure(lua_State *L);
 
 static BOOL overrideMethod(lua_State *L, wax_instance_userdata *instanceUserdata);
+// TODO: Unused now that we are using 64 bit methods?
 static int pcallUserdata(lua_State *L, id self, SEL selector, va_list args);
 static BOOL overrideMethodByInvocation(id klass, SEL selector, char *typeDescription, char *returnType) ;
 static BOOL addMethodByInvocation(id klass, SEL selector, char * typeDescription) ;
@@ -103,7 +104,7 @@ wax_instance_userdata *wax_instance_create(lua_State *L, id instance, BOOL isCla
 
     // give it a nice clean environment
     lua_newtable(L);
-    lua_setfenv(L, -2);
+    wax_setfenv(L, -2);
     
     wax_instance_pushUserdataTable(L);
 
@@ -159,12 +160,12 @@ wax_instance_userdata *wax_instance_createSuper(lua_State *L, wax_instance_userd
         lua_newtable(L); 
     }
     else {
-        lua_getfenv(L, -1);
+        wax_getfenv(L, -1);
         lua_remove(L, -2); // Remove nil and superclass userdata
     }
 
 	// Give it the instance's metatable
-    lua_setfenv(L, -2);
+    wax_setfenv(L, -2);
     
     END_STACK_MODIFY(L, 1)
     
@@ -234,7 +235,7 @@ BOOL wax_instance_pushFunction(lua_State *L, id self, SEL selector) {
 //        NSLog(@"data->waxRetain = YES instance=%@", data->instance);
     }
     
-    lua_getfenv(L, -1);
+    wax_getfenv(L, -1);
     wax_pushMethodNameFromSelector(L, selector);
     lua_rawget(L, -2);
     
@@ -311,9 +312,9 @@ static int __index(lua_State *L) {
         return 1;
     }
     
-    // Check instance userdata, unless we are acting like a super
+    	// Check instance userdata, unless we are acting like a super
 	if (!instanceUserdata->actAsSuper) {
-		lua_getfenv(L, -2);
+		wax_getfenv(L, -2);
 		lua_pushvalue(L, -2);
 		lua_rawget(L, 3);
 	}
@@ -330,7 +331,7 @@ static int __index(lua_State *L) {
 		
 		// If there is no userdata for this instance's class, then leave the nil on the stack and don't anything else
 		if (!lua_isnil(L, -1)) {
-			lua_getfenv(L, -1);
+			wax_getfenv(L, -1);
 			lua_pushvalue(L, 2);
 			lua_rawget(L, -2);
 			lua_remove(L, -2); // Get rid of the userdata env
@@ -395,7 +396,7 @@ static int __newindex(lua_State *L) {
     }
 
     // Add value to the userdata's environment table.
-    lua_getfenv(L, 1);
+    wax_getfenv(L, 1);
     lua_insert(L, 2);
     lua_rawset(L, 2);
     
@@ -569,6 +570,7 @@ static int methodClosure(lua_State *L) {
     return 1;
 }
 
+// TODO: Is this unused??
 static int superMethodClosure(lua_State *L) {
     wax_instance_userdata *instanceUserdata = (wax_instance_userdata *)luaL_checkudata(L, 1, WAX_INSTANCE_METATABLE_NAME);
     int upvalueIndex = 1;

@@ -93,12 +93,14 @@ wax_struct_userdata *wax_struct_create(lua_State *L, const char *typeDescription
     
     // give it a nice clean environment
     lua_newtable(L); 
-    lua_setfenv(L, -2);
+    wax_setfenv(L, -2);
     
     END_STACK_MODIFY(L, 1)
     
     return structUserdata;
 }
+
+
 
 // Maybe all this data should be created at wax_struct_userdata creation time? I think so!
 void wax_struct_pushValueAt(lua_State *L, wax_struct_userdata *structUserdata, int offset) {

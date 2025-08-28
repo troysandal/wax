@@ -6,6 +6,7 @@
 //  Copyright 2009 Probably Interactive. All rights reserved.
 //
 
+#import <assert.h>
 #import "wax_helpers.h"
 #import "wax_instance.h"
 #import "wax_struct.h"
@@ -951,4 +952,22 @@ SEL wax_selectorWithPrefix(SEL selector, const char *prefix){
 BOOL wax_stringHasPrefix(const char *text, const char *prefix){
     char *str = strstr(text, prefix);
     return str == text;
+}
+
+// Luau compatibility helper (replaces lua_getfenv)
+void wax_getEnvironment(lua_State *L, int index) {
+    lua_getmetatable(L, index);
+    lua_pushstring(L, "__env");
+    lua_rawget(L, -2);
+    lua_remove(L, -2); // Remove metatable, keep environment
+}
+
+// Luau compatibility helper (replaces lua_setfenv)
+void wax_setEnvironment(lua_State *L, int index) {
+    assert(lua_type(L, index) == LUA_TUSERDATA);
+    lua_getmetatable(L, index); // Get the metatable of the userdata
+    lua_pushstring(L, "__env");
+    lua_pushvalue(L, -3); // Push the environment table (it's now at -3 because we pushed metatable)
+    lua_rawset(L, -3); // Store environment in metatable
+    lua_pop(L, 1); // Remove the metatable from stack
 }

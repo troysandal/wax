@@ -161,7 +161,7 @@ static int tolua_bnd_takeownership (lua_State* L)
 		{
 			lua_pop(L,1);             /* clear metatable off stack */
 			/* force garbage collection to avoid C to reuse a to-be-collected address */
-			#ifdef LUA_VERSION_NUM
+			#if defined(LUA_VERSION_NUM) || defined(LUA_IS_LUAU)
 			lua_gc(L, LUA_GCCOLLECT, 0);
 			#else
 			lua_setgcthreshold(L,0);
@@ -183,7 +183,7 @@ static int tolua_bnd_releaseownership (lua_State* L)
 	{
 		void* u = *((void**)lua_touserdata(L,1));
 		/* force garbage collection to avoid releasing a to-be-collected address */
-		#ifdef LUA_VERSION_NUM
+		#if defined(LUA_VERSION_NUM) || defined(LUA_IS_LUAU)
 		lua_gc(L, LUA_GCCOLLECT, 0);
 		#else
 		lua_setgcthreshold(L,0);
@@ -695,7 +695,7 @@ TOLUA_API void tolua_array (lua_State* L, const char* name, lua_CFunction get, l
 
 TOLUA_API void tolua_dobuffer(lua_State* L, char* B, unsigned int size, const char* name) {
 
- #ifdef LUA_VERSION_NUM /* lua 5.1 */
+#if defined(LUA_VERSION_NUM) || defined(LUA_IS_LUAU)
  luaL_loadbuffer(L, B, size, name) || lua_pcall(L, 0, 0, 0);
  #else
  lua_dobuffer(L, B, size, name);

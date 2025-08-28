@@ -28,7 +28,7 @@ void luaopen_wax(lua_State *L);
 #pragma mark add by junzhan
 
 
-#if !defined(LUA_IS_LUAU)
+#if defined(LUA_VERSION_NUM)
 //you should call wax_start before these function.
 // run lua string.
 int wax_runLuaString(const char *script);

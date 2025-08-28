@@ -16,9 +16,10 @@
   projects with Luau code.
  
   I couldn't think of a cleaner way to doing this, very open to one.
+  TODO: Is checking for !defined(luaL_dofile) a better way to detect Luau?
  */
 
-#ifdef LUA_IS_LUAU
+#if !defined(LUA_VERSION_NUM)
     // Luau added an argument to these macros that causes compile errors
     // in Lua 5.x compatible code.  Our code and the Lua 5.x code wax
     // compiles against needs to support both APIs, hence these redefinitions.

@@ -11,6 +11,7 @@
 #import "lua.h"
 #import "lauxlib.h"
 
+#import "wax_helpers.h"
 #import "wax_sqlite.h"
 #import "wax_sqlite_operation.h"
 #import "wax_instance.h"
@@ -18,7 +19,7 @@
 static int openDB(lua_State *L);
 static int closeDB(lua_State *L);
 static int execute(lua_State *L);
-
+// TODO: Unused?
 static int push(lua_State *L);
 
 static const struct luaL_Reg metaFunctions[] = {
@@ -87,7 +88,7 @@ int execute(lua_State *L) {
     
     // if there is a callback, do this in an NSOperation
     if (hasCalback) {        
-        lua_getfenv(L, -1); // get operations env
+        wax_getfenv(L, -1); // get operations env
         lua_pushstring(L, WAX_SQLITE_CALLBACK_NAME);
         lua_pushvalue(L, 3); // Push the function callback
         lua_rawset(L, -3); // Associate the operation with the callback

@@ -15,6 +15,8 @@
 
 #import "wax_luau.h"
 
+NSString *wax_tableToJson(lua_State *L, int index, int depth);
+
 void wax_printStack(lua_State *L) {
     int i;
     int top = lua_gettop(L);
@@ -43,9 +45,12 @@ void wax_printStackAt(lua_State *L, int i) {
             printf("'%g'", lua_tonumber(L, i));
             break;
         case LUA_TTABLE:
-            printf("%p\n{\n", lua_topointer(L, i));
+            NSString *table = wax_tableToJson(L, i, 0);
+            printf("%p %s", lua_topointer(L, i), [table UTF8String]);
+            [table release];
+//            printf("%p\n{\n", lua_topointer(L, i));
 //            wax_printTable(L, i);
-            printf("}");
+//            printf("}");
             break;
         default:
             printf("%p", lua_topointer(L, i));
@@ -75,6 +80,59 @@ void wax_printTable(lua_State *L, int t) {
 
         lua_pop(L, 1); // remove 'value'; keeps 'key' for next iteration
     }
+}
+
+NSString *wax_tableToJson(lua_State *L, int index, int depth) {
+    if (depth > 0) {
+        return [[NSString alloc] initWithString:@"{...}"];
+    }
+
+    NSMutableString *json = [[NSMutableString alloc] initWithString:@"{"];
+    BOOL first = YES;
+
+    lua_pushnil(L); // first key
+    while (lua_next(L, index < 0 ? index - 1 : index) != 0) {
+        if (!first) {
+            [json appendString:@", "];
+        }
+        first = NO;
+
+        // Key
+        if (lua_type(L, -2) == LUA_TSTRING) {
+            [json appendFormat:@"\"%s\":", lua_tostring(L, -2)];
+        } else if (lua_type(L, -2) == LUA_TNUMBER) {
+            [json appendFormat:@"%g:", lua_tonumber(L, -2)];
+        } else {
+            [json appendString:@"\"?\":"]; // Unknown key type
+        }
+
+        // Value
+        switch (lua_type(L, -1)) {
+            case LUA_TSTRING:
+                [json appendFormat:@"\"%s\"", lua_tostring(L, -1)];
+                break;
+            case LUA_TBOOLEAN:
+                [json appendString:(lua_toboolean(L, -1) ? @"true" : @"false")];
+                break;
+            case LUA_TNUMBER:
+                [json appendFormat:@"%g", lua_tonumber(L, -1)];
+                break;
+            case LUA_TTABLE: {
+                NSString *subJson = wax_tableToJson(L, -1, depth + 1);
+                [json appendString:subJson];
+                [subJson release];
+                break;
+            }
+            default:
+                [json appendString:@"\"?\""];
+                break;
+        }
+
+        lua_pop(L, 1); // remove value
+    }
+
+    [json appendString:@"}"];
+    return json; // Caller is responsible for releasing
 }
 
 void wax_log(int flag, NSString *format, ...) {
@@ -969,5 +1027,5 @@ void wax_setEnvironment(lua_State *L, int index) {
     lua_pushstring(L, "__env");
     lua_pushvalue(L, -3); // Push the environment table (it's now at -3 because we pushed metatable)
     lua_rawset(L, -3); // Store environment in metatable
-    lua_pop(L, 1); // Remove the metatable from stack
+    lua_pop(L, 2); // Remove the metatable and env table from stack
 }

@@ -1020,7 +1020,7 @@ void wax_assert(bool condition) {
 
 // ------------ setfenv / getfenv replacements --------------
 
-
+#if !defined(LUA_VERSION_NUM) || LUA_VERSION_NUM >= 502
 /**
  * Pushes Wax Environment table onto the stack. Similar to the
  * light and strong userdata tables, indexed by weak userdata.
@@ -1117,3 +1117,5 @@ void wax_setEnvironment(lua_State *L, int index) {
     lua_rawset(L, -3);             // envs[userdata] = newEnv // [newEnv, envs]
     lua_pop(L, 2);                 // []
 }
+
+#endif // !defined(LUA_VERSION_NUM) || LUA_VERSION_NUM >= 502

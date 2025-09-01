@@ -113,6 +113,7 @@ BOOL wax_stringHasPrefix(const char *text, const char *prefix);
 // is a workaround that support Lua 5.1, 5.2+ and Luau.
 void wax_getEnvironment(lua_State *L, int index);
 void wax_setEnvironment(lua_State *L, int index);
+void wax_freeEnvironment(lua_State *L, int index);
 
 // There's no define indicating Luau but there is one indicating Lua.
 // If LUA_VERSION_NUM is present it's Lua, otherwise it's Luau.

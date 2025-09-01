@@ -44,13 +44,11 @@ void wax_printStackAt(lua_State *L, int i) {
         case LUA_TNUMBER:
             printf("'%g'", lua_tonumber(L, i));
             break;
-        case LUA_TTABLE:
+        case LUA_TTABLE: {
             NSString *table = wax_tableToJson(L, i, 0);
             printf("%p %s", lua_topointer(L, i), [table UTF8String]);
             [table release];
-//            printf("%p\n{\n", lua_topointer(L, i));
-//            wax_printTable(L, i);
-//            printf("}");
+            }
             break;
         default:
             printf("%p", lua_topointer(L, i));
@@ -102,6 +100,8 @@ NSString *wax_tableToJson(lua_State *L, int index, int depth) {
             [json appendFormat:@"\"%s\":", lua_tostring(L, -2)];
         } else if (lua_type(L, -2) == LUA_TNUMBER) {
             [json appendFormat:@"%g:", lua_tonumber(L, -2)];
+        } else if (lua_type(L, -2) == LUA_TUSERDATA) {
+            [json appendString:@"__udata:"];
         } else {
             [json appendString:@"\"?\":"]; // Unknown key type
         }
@@ -1012,20 +1012,128 @@ BOOL wax_stringHasPrefix(const char *text, const char *prefix){
     return str == text;
 }
 
-// Luau compatibility helper (replaces lua_getfenv)
-void wax_getEnvironment(lua_State *L, int index) {
-    lua_getmetatable(L, index);
-    lua_pushstring(L, "__env");
-    lua_rawget(L, -2);
-    lua_remove(L, -2); // Remove metatable, keep environment
+void wax_assert(bool condition) {
+    if (!condition) {
+        assert(false);
+    }
 }
 
-// Luau compatibility helper (replaces lua_setfenv)
+// ------------ setfenv / getfenv replacements --------------
+
+/**
+ * Pushes Wax Environment table onto the stack. Similar to the
+ * light and strong userdata tables, indexed by weak userdata.
+ * 
+ * @param L Lua State
+ * @return  Environment table on the stack.
+ */
+void wax_pushEnvironmentTableRef(lua_State *L) {
+    static int envTableRef = LUA_NOREF;
+
+    if (envTableRef == LUA_NOREF) {
+        lua_newtable(L);                // [envs]
+
+        lua_pushvalue(L, -1);           // [envs, envs]
+        lua_setmetatable(L, -2);        // [envs]
+        
+        lua_pushstring(L, "v");         // [envs, "v"]
+        lua_setfield(L, -2, "__mode");  // envs["__mode"] = "v"  (weak table)
+                                        // [envs]
+        envTableRef = luaL_ref(
+            L, LUA_REGISTRYINDEX);      // []
+    }
+    
+    lua_rawgeti(L, LUA_REGISTRYINDEX, envTableRef);
+    wax_assert(!lua_isnil(L, -1));
+}
+
+/**
+ * Pushes Wax Environment table onto the stack. Similar to the
+ * light and strong userdata tables, indexed by weak userdata.
+ * NOTE - We store by name, not luaL_ref(), as Gideros will
+ * empy the Registry betwen runs but we don't get notified.
+ *
+ * @param L Lua State
+ * @return  Environment table on the stack.
+ */
+void wax_pushEnvironmentTable(lua_State *L) {
+    #define WAX_ENVIRONMENT_TABLE "Wax.Environments"
+    
+    lua_pushstring(L, WAX_ENVIRONMENT_TABLE); // ['name']
+    lua_gettable(L, LUA_REGISTRYINDEX);       // [envs]
+
+    if (lua_isnil(L, -1)) {
+        lua_pop(L, 1);
+        
+        lua_newtable(L);                          // [envs]
+        lua_pushstring(L, "v");                   // [envs, "v"]
+        lua_setfield(L, -2, "__mode");            // [envs]       -- envs["__mode"] = "v"
+        
+        lua_pushstring(L, WAX_ENVIRONMENT_TABLE); // [envs, 'name']
+        lua_pushvalue(L, -2);                     // [envs, 'name', envs]
+        lua_settable(L, LUA_REGISTRYINDEX);       // [envs]
+    }
+    
+    wax_assert(!lua_isnil(L, -1));
+}
+#import<UIKit/UIViewController.h>
+
+/**
+ * Frees the environment table associated with a wax userdata.
+ *
+ * @param L Lua State
+ * @param Stack index of userdata
+ * @stack No changes
+ */
+void wax_freeEnvironment(lua_State *L, int index) {
+    wax_pushEnvironmentTable(L);   // [envs]
+    lua_pushvalue(L, index);       // [envs, userdata]
+    lua_pushnil(L);                // [envs, userdata, nil]
+    lua_rawset(L, -3);             // [envs] | envs[userdata] = nil
+    lua_pop(L, 1);                 // []
+}
+
+/**
+ * Pushes environment table associated with this userdata onto the
+ * stack, nil if none.
+ *
+ * @param L       The lua_State
+ * @param index   The stack index of the userdata
+ */
+void wax_getEnvironment(lua_State *L, int index) {
+    wax_assert(lua_isuserdata(L, index));
+    int udAbsIndex = lua_absindex(L, index);
+    
+    wax_pushEnvironmentTable(L);   // [envs]
+    lua_pushvalue(L, udAbsIndex);  // [envs, udata]
+    lua_rawget(L, -2);             // [envs, env]
+    lua_remove(L, -2);             // [env]
+}
+
+/**
+ * Associates the table at the top of the stack with the userdata at `index`,
+ * poppign the table from the stack.
+ *
+ * @param L The lua_State
+ * @param index The stack index of the userdata
+ */
 void wax_setEnvironment(lua_State *L, int index) {
-    assert(lua_type(L, index) == LUA_TUSERDATA);
-    lua_getmetatable(L, index); // Get the metatable of the userdata
-    lua_pushstring(L, "__env");
-    lua_pushvalue(L, -3); // Push the environment table (it's now at -3 because we pushed metatable)
-    lua_rawset(L, -3); // Store environment in metatable
-    lua_pop(L, 2); // Remove the metatable and env table from stack
+    wax_assert(lua_isuserdata(L, index));
+    wax_assert(lua_istable(L, -1));
+    int udAbsIndex = lua_absindex(L, index);
+    
+    wax_getEnvironment(L, index);  // [newEnv, currentEnv]
+    if (!lua_isnil(L, -1)) {
+        wax_assert(lua_istable(L, -1));
+        NSLog(@"Warning: pre-existing env table - this right?");
+        lua_pop(L, 1);             // [newEnv]
+        return;
+    }
+    lua_pop(L, 1);                 // [newEnv]
+
+    wax_pushEnvironmentTable(L);   // [newEnv, envs]
+    lua_pushvalue(L, udAbsIndex);  // [newEnv, envs, userdata]
+    lua_pushvalue(L, -3);          // [newEnv, envs, userdata, newEnv]
+    lua_rawset(L, -3);             // envs[userdata] = newEnv // [newEnv, envs]
+    lua_pop(L, 2);                 // []
 }

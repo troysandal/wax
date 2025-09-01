@@ -421,10 +421,13 @@ static int __gc(lua_State *L) {
         
         [instanceUserdata->instance release];
         
-        lua_pushlightuserdata(L, instanceUserdata->instance);        
+        lua_pushlightuserdata(L, instanceUserdata->instance);
         lua_pushnil(L);
         lua_rawset(L, -3);
-        lua_pop(L, 1);        
+        lua_pop(L, 1);
+        
+        // Free environment table created by wax_setfenv()
+        wax_freeEnvironment(L, -1);
     }
     
     return 0;

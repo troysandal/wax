@@ -425,9 +425,10 @@ static int __gc(lua_State *L) {
         lua_pushnil(L);
         lua_rawset(L, -3);
         lua_pop(L, 1);
-        
+        #if !defined(LUA_VERSION_NUM) || LUA_VERSION_NUM >= 502
         // Free environment table created by wax_setfenv()
         wax_freeEnvironment(L, -1);
+        #endif
     }
     
     return 0;

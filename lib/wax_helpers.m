@@ -1020,38 +1020,18 @@ void wax_assert(bool condition) {
 
 // ------------ setfenv / getfenv replacements --------------
 
-/**
- * Pushes Wax Environment table onto the stack. Similar to the
- * light and strong userdata tables, indexed by weak userdata.
- * 
- * @param L Lua State
- * @return  Environment table on the stack.
- */
-void wax_pushEnvironmentTableRef(lua_State *L) {
-    static int envTableRef = LUA_NOREF;
-
-    if (envTableRef == LUA_NOREF) {
-        lua_newtable(L);                // [envs]
-
-        lua_pushvalue(L, -1);           // [envs, envs]
-        lua_setmetatable(L, -2);        // [envs]
-        
-        lua_pushstring(L, "v");         // [envs, "v"]
-        lua_setfield(L, -2, "__mode");  // envs["__mode"] = "v"  (weak table)
-                                        // [envs]
-        envTableRef = luaL_ref(
-            L, LUA_REGISTRYINDEX);      // []
-    }
-    
-    lua_rawgeti(L, LUA_REGISTRYINDEX, envTableRef);
-    wax_assert(!lua_isnil(L, -1));
-}
 
 /**
  * Pushes Wax Environment table onto the stack. Similar to the
  * light and strong userdata tables, indexed by weak userdata.
+ *
  * NOTE - We store by name, not luaL_ref(), as Gideros will
- * empy the Registry betwen runs but we don't get notified.
+ * empy the Registry betwen runs but we don't get notified. Refs
+ * would be faster BUT I couldn't guarantee that a stale ref
+ * value wasn't being re-used so we stick with strings for now.
+ *
+ * TODO: Can we use refs with Gideros hot loading? This is a
+ * critical path for Wax.
  *
  * @param L Lua State
  * @return  Environment table on the stack.
@@ -1076,7 +1056,6 @@ void wax_pushEnvironmentTable(lua_State *L) {
     
     wax_assert(!lua_isnil(L, -1));
 }
-#import<UIKit/UIViewController.h>
 
 /**
  * Frees the environment table associated with a wax userdata.
@@ -1122,11 +1101,12 @@ void wax_setEnvironment(lua_State *L, int index) {
     wax_assert(lua_istable(L, -1));
     int udAbsIndex = lua_absindex(L, index);
     
+    // TODO: Double lookup of env table -> bad for performance
     wax_getEnvironment(L, index);  // [newEnv, currentEnv]
     if (!lua_isnil(L, -1)) {
         wax_assert(lua_istable(L, -1));
         NSLog(@"Warning: pre-existing env table - this right?");
-        lua_pop(L, 1);             // [newEnv]
+        lua_pop(L, 2);             // []
         return;
     }
     lua_pop(L, 1);                 // [newEnv]

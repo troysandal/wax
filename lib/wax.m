@@ -92,7 +92,8 @@ int wax_panic(lua_State *L) {
 lua_CFunction lua_atpanic (lua_State *L, lua_CFunction panicf);
 
 void wax_setup(void) {
-//	NSSetUncaughtExceptionHandler(&wax_uncaughtExceptionHandler);//let it catched by outside crash handler
+    // TODO: junzhan commented this out - figure out why
+    // NSSetUncaughtExceptionHandler(&wax_uncaughtExceptionHandler);//let it catched by outside crash handler
 	
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager changeCurrentDirectoryPath:[[NSBundle mainBundle] bundlePath]];
@@ -119,8 +120,25 @@ void wax_startWithNil(void){
     wax_start(nil, nil);
 }
 
-#if defined(LUA_VERSION_NUM)
-void wax_runInitialScript(lua_State *L, char* initScript) {
+void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
+	wax_setup(); 
+	
+	lua_State *L = wax_currentLuaState();
+	
+	// Load extentions
+	// ---------------
+	if (extensionFunction) {
+        extensionFunction(L);
+		
+        va_list ap;
+        va_start(ap, extensionFunction);
+        while((extensionFunction = va_arg(ap, lua_CFunction))) extensionFunction(L);
+		
+        va_end(ap);
+    }
+    
+    // Getting this to work (stdlib, loading files) in Luau has not been researched.
+    #if defined(LUA_VERSION_NUM)
     // Load stdlib
     // ---------------
     #ifdef WAX_STDLIB
@@ -163,30 +181,6 @@ void wax_runInitialScript(lua_State *L, char* initScript) {
             }
         }
     }
-}
-#endif
-
-void wax_start(char* initScript, lua_CFunction extensionFunction, ...) {
-	wax_setup(); 
-	
-	lua_State *L = wax_currentLuaState();
-	
-	// Load extentions
-	// ---------------
-	if (extensionFunction) {
-        extensionFunction(L);
-		
-        va_list ap;
-        va_start(ap, extensionFunction);
-        while((extensionFunction = va_arg(ap, lua_CFunction))) extensionFunction(L);
-		
-        va_end(ap);
-    }
-    
-    // Luau doesn't have the facilites to load and compile code like Lua 5x does.
-    // Adding that functionality has not been researched.
-    #if defined(LUA_VERSION_NUM)
-        wax_runInitialScript(L, initScript);
     #endif
 }
 

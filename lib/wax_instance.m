@@ -404,7 +404,6 @@ static int __newindex(lua_State *L) {
 }
 
 static int __gc(lua_State *L) {
-    
     wax_instance_userdata *instanceUserdata = (wax_instance_userdata *)luaL_checkudata(L, 1, WAX_INSTANCE_METATABLE_NAME);
     
 //    wax_log(LOG_GC, @"Releasing %@ %@(%p)", instanceUserdata->isClass ? @"Class" : @"Instance", [instanceUserdata->instance class], instanceUserdata->instance);
@@ -473,7 +472,8 @@ static int methods(lua_State *L) {
 #pragma mark ----------------------
 
 static int methodClosure(lua_State *L) {
-//    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"METHODCLOSURE: OH NO SEPERATE THREAD");
+    // TODO: junzhan commented this out, we are putting it back - that ok?
+    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"METHODCLOSURE: OH NO SEPERATE THREAD");
 
     wax_instance_userdata *instanceUserdata = (wax_instance_userdata *)luaL_checkudata(L, 1, WAX_INSTANCE_METATABLE_NAME);    
     const char *selectorName = luaL_checkstring(L, lua_upvalueindex(1));//
@@ -516,7 +516,6 @@ static int methodClosure(lua_State *L) {
     
     int objcArgumentCount = (int)[signature numberOfArguments] - 2; // skip the hidden self and _cmd argument
     int luaArgumentCount = lua_gettop(L) - 1;
-    
     
     if (objcArgumentCount > luaArgumentCount && !wax_instance_isWaxClass(instance)) { 
         luaL_error(L, "Not Enough arguments given! Method named '%s' requires %d argument(s), you gave %d. (Make sure you used ':' to call the method)", selectorName, objcArgumentCount + 1, lua_gettop(L));
@@ -666,8 +665,8 @@ static int customInitMethodClosure(lua_State *L) {
 //64 solve 1:instance method go Invocation
 static int pcallUserdataARM64Invocation(lua_State *L, id self, SEL selector, NSInvocation *anInvocation) {
     BEGIN_STACK_MODIFY(L)
-    
-//    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"PCALLUSERDATA: OH NO SEPERATE THREAD");
+    // TODO: Uncommented    
+    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"PCALLUSERDATA: OH NO SEPERATE THREAD");
     
     // A WaxClass could have been created via objective-c (like via NSKeyUnarchiver)
     // In this case, no lua object was ever associated with it, so we've got to
@@ -725,7 +724,7 @@ error:
 static int pcallUserdataARM64ImpCall(lua_State *L, id self, SEL selector, va_list args) {
     BEGIN_STACK_MODIFY(L)
     
-//    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"PCALLUSERDATA: OH NO SEPERATE THREAD");
+    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) NSLog(@"PCALLUSERDATA: OH NO SEPERATE THREAD");
     
     // A WaxClass could have been created via objective-c (like via NSKeyUnarchiver)
     // In this case, no lua object was ever associated with it, so we've got to

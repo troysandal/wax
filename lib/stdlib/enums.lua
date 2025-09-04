@@ -245,6 +245,7 @@ UIRemoteNotificationTypeNone = 0
 UIRemoteNotificationTypeBadge = math.pow(2, 0)
 UIRemoteNotificationTypeSound = math.pow(2, 1)
 UIRemoteNotificationTypeAlert = math.pow(2, 2)
+UIRemoteNotificationTypeNewsstandContentAvailability = math.pow(2, 3)
 
 -- NSURLCredentialPersistence;
 NSURLCredentialPersistenceNone = 0

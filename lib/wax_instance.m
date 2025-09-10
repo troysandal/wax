@@ -559,7 +559,7 @@ static int methodClosure(lua_State *L) {
                 lua_pushnil(L);
                 [instance release];
             }
-            else {
+            else if (lua_isuserdata(L, -1)) {
                 wax_instance_userdata *returnedInstanceUserdata = (wax_instance_userdata *)lua_topointer(L, -1);
                 if (returnedInstanceUserdata) { // Could return nil
                     [returnedInstanceUserdata->instance release]; // Wax automatically retains a copy of the object, so the alloc needs to be released retainCount-1

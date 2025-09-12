@@ -536,8 +536,8 @@
 				0538B4C22E53DD4700470547 /* wax_memory.m */,
 			);
 			name = memory;
-			path = /Users/troy/depot/wax/BhGideros/wax/lib/extensions/memory;
-			sourceTree = "<absolute>";
+			path = ../../../../../lib/extensions/memory;
+			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;

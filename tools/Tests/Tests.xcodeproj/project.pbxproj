@@ -214,6 +214,7 @@
 		043E6132113C3DA5007A6104 /* print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = print.c; sourceTree = "<group>"; };
 		043E6146113C3DA5007A6104 /* wax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax.h; sourceTree = "<group>"; };
 		043E6147113C3DA5007A6104 /* wax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wax.m; sourceTree = "<group>"; };
+		043E6146113C3DA5007A6105 /* wax_luau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax_luau.h; sourceTree = "<group>"; };
 		043E6148113C3DA5007A6104 /* wax_class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax_class.h; sourceTree = "<group>"; };
 		043E6149113C3DA5007A6104 /* wax_class.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wax_class.m; sourceTree = "<group>"; };
 		043E614C113C3DA5007A6104 /* wax_helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wax_helpers.h; sourceTree = "<group>"; };
@@ -252,7 +253,6 @@
 		0538B4C22E53DD4700470547 /* wax_memory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wax_memory.m; sourceTree = "<group>"; };
 		0538B4C52E53DD6500470547 /* wax_block_description.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wax_block_description.h; sourceTree = "<group>"; };
 		0538B4C62E53DD6500470547 /* wax_block_description.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = wax_block_description.m; sourceTree = "<group>"; };
-		055D7D042E5D38940001F544 /* wax_luau.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wax_luau.h; path = /Users/troy/depot/wax/BhWax/wax/lib/wax_luau.h; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -325,7 +325,6 @@
 		043E60C6113C3DA5007A6104 /* wax */ = {
 			isa = PBXGroup;
 			children = (
-				055D7D042E5D38940001F544 /* wax_luau.h */,
 				00DAC0EE1AF0B5CF00206217 /* adaptation */,
 				043E60CA113C3DA5007A6104 /* build-scripts */,
 				043E60CD113C3DA5007A6104 /* extensions */,
@@ -340,6 +339,7 @@
 				043E614D113C3DA5007A6104 /* wax_helpers.m */,
 				043E614E113C3DA5007A6104 /* wax_instance.h */,
 				043E614F113C3DA5007A6104 /* wax_instance.m */,
+				043E6146113C3DA5007A6105 /* wax_luau.h */,
 				0413C06E1200C9960069C579 /* wax_server.h */,
 				0413C06F1200C9960069C579 /* wax_server.m */,
 				043E6150113C3DA5007A6104 /* wax_struct.h */,

@@ -11,8 +11,8 @@ setmetatable(_G, {
   end
 })
 
-require "wax.ext"
+require "wax.ext.init"
 require "wax.enums"
 require "wax.structs"
 require "wax.waxClass"
-require "wax.helpers"
+require "wax.helpers.init"

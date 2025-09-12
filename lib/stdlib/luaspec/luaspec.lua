@@ -280,13 +280,14 @@ function Context:run()
 
       self:run_afters(env)
     
+      -- TODO : io not working in Luau, fix
       if not success then
-        io.write("x")
+        --io.write("x")
         spec:add_results(false, message, traceback)
       else
-        io.write(".")
+        --io.write(".")
       end  
-      io.flush()  
+      --io.flush()  
     
       -- restore stored values for mocks
       for key, old_value in pairs(mocks) do

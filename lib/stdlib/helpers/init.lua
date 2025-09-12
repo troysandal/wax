@@ -5,8 +5,8 @@ require "wax.helpers.base64"
 require "wax.helpers.time"
 require "wax.helpers.cache"
 require "wax.helpers.autoload"
-require "wax.helpers.WaxServer"
-require "wax.helpers.pickView"
+-- require "wax.helpers.WaxServer"
+-- require "wax.helpers.pickView"
 
 -- Just a bunch of global helper functions
 

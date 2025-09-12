@@ -1,3 +1,6 @@
+-- This metatable magic allows for undefined Lua globals to be looked up in
+-- the Wax class dictionary.
+
 setmetatable(_G, {
   __index = function(self, key)
     local class = wax.class[key]

@@ -2,7 +2,10 @@
 -- compatible with lua 5.1
 -- http://www.it-rfc.de
 
-module("wax.base64", package.seeall)
+local base64 = {}
+wax.base64 = base64
+
+--module("wax.base64", package.seeall)
 
 -- bitshift functions (<<, >> equivalent)
 -- shift left
@@ -32,7 +35,7 @@ local base64chars = {[0]='A',[1]='B',[2]='C',[3]='D',[4]='E',[5]='F',[6]='G',[7]
 
 -- function encode
 -- encodes input string to base64.
-function encode(data)
+function wax.base64.encode(data)
   local bytes = {}
   local result = ""
   for spos=0,string.len(data)-1,3 do
@@ -51,7 +54,7 @@ local base64bytes = {['A']=0,['B']=1,['C']=2,['D']=3,['E']=4,['F']=5,['G']=6,['H
 
 -- function decode
 -- decode base64 input to string
-function decode(data)
+function wax.base64.decode(data)
   local chars = {}
   local result=""
   for dpos=0,string.len(data)-1,4 do
@@ -62,3 +65,5 @@ function decode(data)
   end
   return result
 end
+
+return base64

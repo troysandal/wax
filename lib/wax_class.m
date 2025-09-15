@@ -125,6 +125,7 @@ static int __call(lua_State *L) {
 }
 
 //#define NSOBJ_ALLOC
+//TODO: isn't this just syntactic sugar?
 #if defined(NSOBJ_ALLOC)
 @interface NSObject ()
 -(id) wax_originalAllocWithZone: (NSZone*) zone;

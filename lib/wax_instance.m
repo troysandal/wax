@@ -346,35 +346,9 @@ static int __index(lua_State *L) {
         BOOL foundSelector = wax_selectorForInstance(instanceUserdata, foundSelectors, luaIndexSelector, NO);
 
         if (foundSelector) { // If the class has a method with this name, push as a closure
-            
-            if(instanceUserdata->actAsSuper){//super method, method_setImplementation is inefficient so add a super method for subclass
-                for(int i = 0; i < 2; ++i){
-                    SEL selector = foundSelectors[i];
-                    SEL selfSuperSelector = wax_selectorWithPrefix(selector, WAX_SUPER_METHOD_PREFIX);
-                    
-                    Method selfSuperMethod = class_getInstanceMethod([instanceUserdata->instance class], selfSuperSelector);
-                    Method superMethod = class_getInstanceMethod(instanceUserdata->isSuper, selector);
-                    
-                    if(!superMethod){
-                        continue ;
-                    }
-                    
-                    IMP superMethodImp = method_getImplementation(superMethod);
-                    char *typeDescription = (char *)method_getTypeEncoding(superMethod);
-                    id klass = [instanceUserdata->instance class];
-                    //add SUPERselector for subclass
-                    if (!selfSuperMethod){
-                        class_addMethod(klass, selfSuperSelector, superMethodImp, typeDescription);
-                    }
-                }
-                lua_pushstring(L, sel_getName(wax_selectorWithPrefix(foundSelectors[0], WAX_SUPER_METHOD_PREFIX)));
-                foundSelectors[1] ? lua_pushstring(L, sel_getName(wax_selectorWithPrefix(foundSelectors[1], WAX_SUPER_METHOD_PREFIX))) : lua_pushnil(L);//
-                lua_pushcclosure(L, methodClosure, 2);
-            }else{
-                lua_pushstring(L, sel_getName(foundSelectors[0]));
-                foundSelectors[1] ? lua_pushstring(L, sel_getName(foundSelectors[1])) : lua_pushnil(L);//
-                lua_pushcclosure(L, methodClosure, 2);
-            }
+            lua_pushstring(L, sel_getName(foundSelectors[0]));
+            foundSelectors[1] ? lua_pushstring(L, sel_getName(foundSelectors[1])) : lua_pushnil(L);
+            lua_pushcclosure(L, instanceUserdata->actAsSuper ? superMethodClosure : methodClosure, 2);
         }
     }
     else if (!instanceUserdata->isSuper && instanceUserdata->isClass && wax_isInitMethod(luaIndexSelector)) { // Is this an init method create in lua?
@@ -573,16 +547,14 @@ static int methodClosure(lua_State *L) {
     return 1;
 }
 
-// TODO: Is this unused??
+// Special closure that will call the super class's method instead of the instance's method
 static int superMethodClosure(lua_State *L) {
     wax_instance_userdata *instanceUserdata = (wax_instance_userdata *)luaL_checkudata(L, 1, WAX_INSTANCE_METATABLE_NAME);
-    int upvalueIndex = 1;
     const char *selectorName = luaL_checkstring(L, lua_upvalueindex(1));
 
     // If the only arg is 'self' and there is a selector with no args. USE IT!
     if (lua_gettop(L) == 1 && lua_isstring(L, lua_upvalueindex(2))) {
         selectorName = luaL_checkstring(L, lua_upvalueindex(2));
-        upvalueIndex = 2;
     }
     
     SEL selector = sel_getUid(selectorName);
@@ -595,21 +567,6 @@ static int superMethodClosure(lua_State *L) {
         IMP selfMethodImp = method_getImplementation(selfMethod);        
         IMP superMethodImp = method_getImplementation(superMethod);
 
-        
-        char *typeDescription = (char *)method_getTypeEncoding(selfMethod);
-        
-        const char *selectorName = sel_getName(selector);
-        char newSelectorName[strlen(selectorName) + strlen(WAX_SUPER_METHOD_PREFIX)+1];
-        strcpy(newSelectorName, WAX_SUPER_METHOD_PREFIX);
-        strcat(newSelectorName, selectorName);
-        SEL newSelector = sel_getUid(newSelectorName);
-        id klass = [instanceUserdata->instance class];
-        if(!class_respondsToSelector(klass, newSelector)) {
-            class_addMethod(klass, newSelector, superMethodImp, typeDescription);
-        }
-
-        lua_setupvalue (L, -1, lua_upvalueindex(upvalueIndex));
-        
         method_setImplementation(selfMethod, superMethodImp);
         
         methodClosure(L);

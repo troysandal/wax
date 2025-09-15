@@ -108,6 +108,7 @@ int waxGCInstance(lua_State *L){
     lua_pushnil(L);
     lua_setmetatable(L, -2);
     
+    // TODO: call wax_freeEnvironment ?
     END_STACK_MODIFY(L, 0);
     return  0;
 }
